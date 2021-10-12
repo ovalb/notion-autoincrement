@@ -18,7 +18,8 @@ exports.getLatestDate = async function() {
 
     // return response
     const pages = response.results;
-    return pages[0].properties.Date.date?.start;
+    const latestDate = pages[0].properties.Date.date?.start;
+    return (latestDate) ? latestDate : new Date().toISOString()
 }
 
  exports.createPagesAutomatically = async function(latestDate, numOfPagesToCreate) {
@@ -42,7 +43,6 @@ exports.getLatestDate = async function() {
                 }
             }
         })
-
-        console.log("response is:", response.id, " at ", response.created_time);
+        console.log("page created: ", response.url);
     }
 }
